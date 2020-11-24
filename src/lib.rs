@@ -208,11 +208,14 @@ impl<'a, T> LifeRef<'a, T> {
     /// let mut t = (0, 1);
     /// let mut s = String::from("Unaltered");
     /// let r = borrow_as::LifeRef::wrap_mut(&mut t).add_mut(&mut s);
+    ///
     /// let (y, x) = r.0.get();
     /// r.0.set((x, y));
+    ///
     /// let mut r1 = r.1.take();
     /// r1.replace_range(..3, "A");
     /// r.1.set(r1);
+    ///
     /// assert_eq!(t, (1, 0));
     /// assert_eq!(s, "Altered");
     pub fn add_mut<U>(self, r: &'a mut U) -> LifeRef<'a, T::Output> where
